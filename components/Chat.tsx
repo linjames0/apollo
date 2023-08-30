@@ -6,45 +6,21 @@ import { ChatLine, LoadingChatLine, type ChatGPTMessage } from './ChatLine'
 const COOKIE_NAME = 'nextjs-example-ai-chat-gpt3'
 
 
-export type BeliefType = 'christian' | 'islam' | 'mormon' | 'hinduism' | 'confucianism' | 'all_beliefs'
+export type ResearchType = 'christian' | 'clinical_trials'
 
 
 // default first message to display in UI (not necessary to define the prompt)
-export const initialMessages: Record<BeliefType, ChatGPTMessage[]> = {
+export const initialMessages: Record<ResearchType, ChatGPTMessage[]> = {
   christian: [
     {
       role: 'assistant',
       content: "Hi! I'm an AI Bible Scholar. I'm able to answer any questions you have that might be answered in the Bible. Feel free to describe a current situation you're in, reference a Bible verse, or ask me a question.",
     },
   ],
-  islam: [
+  clinical_trials: [
     {
       role: 'assistant',
-      content: "Hi! I'm an AI Quran Scholar. I'm able to answer any questions you have that might be answered in the Quran. Feel free to describe a current situation you're in, reference a Quran verse, or ask me a question.",
-    },
-  ],
-  mormon: [
-    {
-      role: 'assistant',
-      content: "Hi! I'm an AI Book of Mormon Scholar. I'm able to answer any questions you have that might be answered in the Book of Mormon. Feel free to describe a current situation you're in, reference a Book of Mormon verse, or ask me a question.",
-    },
-  ],
-  hinduism: [
-    {
-      role: 'assistant',
-      content: "Hi! I'm an AI Bhagavad Gita Scholar. I'm able to answer any questions you have that might be answered in the Bhagavad Gita. Feel free to describe a current situation you're in, reference a Bhagavad Gita verse, or ask me a question.",
-    },
-  ],
-  confucianism: [
-    {
-      role: 'assistant',
-      content: "Hi! I'm an AI Confucianism Scholar. I'm able to answer any questions you have that might be answered in the Analects (more books coming soon). Feel free to describe a current situation you're in, reference a Analects verse, or ask me a question.",
-    },
-  ],
-  all_beliefs: [
-    {
-      role: 'assistant',
-      content: "Hi! I'm an AI Religion Scholar. I'm able to answer any questions you have that might be answered across all major religious books, mainly the Bible, Quran, Book of Mormon, Bhagavad Gita, and Analects. Feel free to describe a current situation you're in, reference a verse, or ask me a question.",
+      content: "Hi! I'm an AI assistant trained on databases of millions of clinical trial data. I'm here to help answer all your questions about clinical trials. Feel free to start by asking me a question.",
     }
   ]
 }
@@ -81,10 +57,8 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
 )
 
 
-
-
-export function Chat({ beliefType }: { beliefType: BeliefType }) {
-  const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessages[beliefType])
+export function Chat({ researchType }: { researchType: ResearchType }) {
+  const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessages[researchType])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [cookie, setCookie] = useCookies([COOKIE_NAME])
@@ -115,6 +89,7 @@ export function Chat({ beliefType }: { beliefType: BeliefType }) {
     // const last10messages = newMessages.slice(-10) // remember last 10 messages
 
     const response = await fetch('/api/chat', {
+    // const response = await fetch('http://127.0.0.1:5000/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -122,11 +97,12 @@ export function Chat({ beliefType }: { beliefType: BeliefType }) {
       body: JSON.stringify({
         messages: newMessages,
         user: cookie[COOKIE_NAME],
-        belief: beliefType,
+        belief: researchType,
       }),
     })
 
     console.log('Edge function returned.')
+    console.log(response) 
 
     if (!response.ok) {
       throw new Error(response.statusText)
@@ -137,6 +113,7 @@ export function Chat({ beliefType }: { beliefType: BeliefType }) {
       throw new Error('No data received.')
     }
 
+    console.log(data)
     setMessages([
       ...data,
     ])
@@ -149,11 +126,11 @@ export function Chat({ beliefType }: { beliefType: BeliefType }) {
   }
   return (
     <div className="rounded-2xl border-zinc-100  lg:border lg:p-6">
-      <span className="mx-auto flex flex-grow text-red-400 clear-both mb-3 -mt-1 text-sm">
+      {/* <span className="mx-auto flex flex-grow text-red-400 clear-both mb-3 -mt-1 text-sm">
         We&apos;re currently experiencing high traffic. Please be patient as things may be slow.
-      </span>
+      </span> */}
       <span className="mx-auto flex flex-grow text-gray-400 clear-both mb-5 -mt-1 text-sm">
-        Disclaimer: This is a beta version of Scholar AI. The answers provided by the AI are not guaranteed to be accurate. Please consult a religious leader for any serious questions.
+        Disclaimer: This is a beta version of Apollo AI. The answers provided by the AI are not guaranteed to be accurate. Please consult a certified medical professional for any serious questions.
         All languages are supported, but the AI is trained on English.
         No personal information is stored, all chats are anonymous and deleted as soon as the chat is over.
       </span>

@@ -10,9 +10,9 @@ export default function Header() {
   return (
     <div className="flex w-full max-w-[700px] py-4 justify-evenly items-center gap-x-2 gap-y-3 flex-wrap mb-2">
       <Link href="/">
-        <h2 className={clsx("text-sm font-medium text-center rounded-lg", active('/'))}>All Beliefs</h2>
+        <h2 className={clsx("text-sm font-medium text-center rounded-lg", active('/'))}>Clinical Trials</h2>
       </Link>
-      <Link href="/christian">
+      {/* <Link href="/christian">
         <h2 className={clsx("text-sm font-medium text-center rounded-lg", active('/christian'))}>Christianity</h2>
       </Link>
       <Link href="/mormon">
@@ -29,7 +29,7 @@ export default function Header() {
       </Link>
       <Link href="https://alex.macrocosm.so/religion">
         < h2 className={clsx("text-sm font-medium text-center rounded-lg", active(''))}>About Us</h2>
-      </Link>
+      </Link> */}
     </div >
   )
 }

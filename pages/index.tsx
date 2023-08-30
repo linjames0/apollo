@@ -24,7 +24,7 @@ function Home() {
       <meta name="twitter:image" content="https://tensor.church/static/open_graph_1.png" />
     </Head>
     <div className="w-full max-w-[700px]">
-      <Chat beliefType='all_beliefs' />
+      <Chat researchType='clinical_trials' />
     </div>
   </>
   )

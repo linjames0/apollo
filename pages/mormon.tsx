@@ -26,7 +26,7 @@ function Home() {
       </Head>
 
       <div className="w-full max-w-[700px]">
-        <Chat beliefType='mormon' />
+        <Chat researchType='mormon' />
       </div>
     </>
   )
