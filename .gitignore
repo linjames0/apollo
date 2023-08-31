@@ -25,6 +25,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Add
+chroma-db/
+
 # Local ENV files
 .env.local
 .env.development.local
