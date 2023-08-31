@@ -6,17 +6,11 @@ import { ChatLine, LoadingChatLine, type ChatGPTMessage } from './ChatLine'
 const COOKIE_NAME = 'nextjs-example-ai-chat-gpt3'
 
 
-export type ResearchType = 'christian' | 'clinical_trials'
+export type ResearchType = 'clinical_trials'
 
 
 // default first message to display in UI (not necessary to define the prompt)
 export const initialMessages: Record<ResearchType, ChatGPTMessage[]> = {
-  christian: [
-    {
-      role: 'assistant',
-      content: "Hi! I'm an AI Bible Scholar. I'm able to answer any questions you have that might be answered in the Bible. Feel free to describe a current situation you're in, reference a Bible verse, or ask me a question.",
-    },
-  ],
   clinical_trials: [
     {
       role: 'assistant',

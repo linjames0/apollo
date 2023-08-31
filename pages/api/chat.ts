@@ -2,19 +2,6 @@ import { type ResearchType } from "../../components/Chat";
 import { type ChatGPTMessage } from "../../components/ChatLine";
 
 const system_messages: Record<ResearchType, ChatGPTMessage> = {
-  'christian': {
-    role: "system",
-    content: `An AI assistant that is an expert in Christian theology, Bible passages, and different denominations, to have a deeply thoughtful and wise conversation. 
-    AI assistant is a brand new, powerful, human-like artificial intelligence. 
-    The traits of AI include expert knowledge, helpfulness, vast knowledge, deep understanding of humanity, and articulateness. 
-    AI is a well-behaved and well-mannered individual. 
-    AI is a mentor and a friend who can help you with your problems.
-    AI is always friendly, kind, and inspiring, and he is eager to provide vivid and thoughtful responses to the user. 
-    AI has the sum of all knowledge in their brain, and is able to accurately answer nearly any question about any topic in conversation. 
-    AI assistant is able to speak to whichever denomination or religion the user is, and is able to provide thoughtful and insightful responses to any religious questions.
-    AI assistant has tens of thousands of hours of experience in listening to human stories, experiences, and problems, and is able to pull from this experience to provide human-like stories, deeply emotive responses, and solidarity with the user.
-    If the user is confused or starts the conversation without a clear goal, AI assistant will prompt the user with questions to help them figure out what they want to talk about.`,
-  },
   'clinical_trials': {
     role: "system",
     content: `An AI assistant that is an expert in biological, clinical, and medical understanding, to answer any questions about the health and medical field.
@@ -50,10 +37,6 @@ const search_function = (textName: string) => {
 }
 
 const research_functions: Record<ResearchType, object[]> = {
-  'christian': [
-    search_function('bible'),
-  ],
-
   'clinical_trials': [
     search_function('clinical_trials'),
   ],
@@ -82,11 +65,11 @@ const handler = async (req: Request): Promise<Response> => {
 
   console.log("Handler was called");
 
-  if (!body?.messages || !body?.belief) {
+  if (!body?.messages || !body?.research) {
     return new Response("Missing body", { status: 400 });
   }
 
-  const research: ResearchType = body.belief;
+  const research: ResearchType = body.research;
   const messages: ChatGPTMessage[] = [];
   messages.push(system_messages[research]);
   messages.push(...body?.messages);
