@@ -4,7 +4,7 @@ import { Chat } from '../components/Chat'
 function Home() {
   return (
     <div className="w-full max-w-[700px]">
-      <Chat researchType='confucianism' />
+      {/* <Chat researchType='confucianism' /> */}
     </div>
   )
 }
