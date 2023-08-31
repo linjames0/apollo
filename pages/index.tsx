@@ -9,9 +9,9 @@ function Home() {
       <meta name="description" content="Chat and ask questions about clinical trials, medicine, or healthcare with AI. Powered by ChatGPT." />
       <meta property="og:title" content="Apollo AI - Research Chat" />
       <meta property="og:description" content="Chat and ask questions about clinical trials, medicine, or healthcare with AI. Powered by ChatGPT." />
-      <meta property="og:url" content="https://tensor.church" />
+      <meta property="og:url" content="https://apollo-gejhce3tq-lin-james.vercel.app" />
       <meta property="og:site_name" content="Apollo AI - Research Chat" />
-      <meta property="og:image" content="https://tensor.church/static/open_graph_1.png" />
+      <meta property="og:image" content="https://apollo-gejhce3tq-lin-james.vercel.app/ApolloThumbnail.png" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:locale" content="en-US" />
@@ -21,7 +21,7 @@ function Home() {
       <meta name="twitter:description" content="Chat and ask questions about clinical trials, medicine, or healthcare with AI. Powered by ChatGPT." />
       <meta name="twitter:site" content="@macrocosmcorp" />
       <meta name="twitter:site:id" content="1515531815594864640" />
-      <meta name="twitter:image" content="https://tensor.church/static/open_graph_1.png" />
+      <meta name="twitter:image" content="https://apollo-gejhce3tq-lin-james.vercel.app/ApolloThumbnail.png" />
     </Head>
     <div className="w-full max-w-[700px]">
       <Chat researchType='clinical_trials' />
