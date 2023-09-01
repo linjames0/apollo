@@ -12,24 +12,9 @@ export default function Header() {
       <Link href="/">
         <h2 className={clsx("text-sm font-medium text-center rounded-lg", active('/'))}>Clinical Trials</h2>
       </Link>
-      {/* <Link href="/christian">
-        <h2 className={clsx("text-sm font-medium text-center rounded-lg", active('/christian'))}>Christianity</h2>
-      </Link>
-      <Link href="/mormon">
-        <h2 className={clsx("text-sm font-medium text-center rounded-lg", active('/mormon'))}>Mormonism</h2>
-      </Link>
-      <Link href="/islam">
-        <h2 className={clsx("text-sm font-medium text-center rounded-lg", active('/islam'))}>Islam</h2>
-      </Link>
-      <Link href="/hindu">
-        < h2 className={clsx("text-sm font-medium text-center rounded-lg", active('/hindu'))}>Hinduism</h2>
-      </Link>
-      <Link href="/ruism">
-        < h2 className={clsx("text-sm font-medium text-center rounded-lg", active('/ruism'))}>Confucianism</h2>
-      </Link>
-      <Link href="https://alex.macrocosm.so/religion">
+      <Link href="https://alex.macrocosm.so">
         < h2 className={clsx("text-sm font-medium text-center rounded-lg", active(''))}>About Us</h2>
-      </Link> */}
+      </Link>
     </div >
   )
 }

@@ -90,37 +90,10 @@ const payload_template = {
   function_call: "auto",
 };
 
-// const payload_template = {
-//   model: "gpt-3.5-turbo-0613",
-//   functions: [
-//     {
-//       name: "search_bible",
-//       description: "Search the bible with natural language, returning verses/passages/chapters that match.",
-//       parameters: {
-//         type: "object",
-//         properties: {
-//           query: {
-//             type: "string",
-//             description: "A query to search the bible with, best formatted as a question or a statement.",
-//           },
-//           num_results: {
-//             type: "integer",
-//             description: "The number of results to return.",
-//             default: 5,
-//           },
-//         },
-//         required: ["query"],
-//       },
-//     },
-//   ],
-//   function_call: "auto",
-// };
-
-type SearchFunctions = 'search_bible' | 'search_clinical_trials'
+type SearchFunctions =  'search_clinical_trials'
 
 const search_functions: Record<SearchFunctions, string> = {
-  'search_bible': 'https://bible.religions.chat/search',
-  'search_clinical_trials': 'https://clinical.religions.chat/search',
+  'search_clinical_trials': 'http://127.0.0.1:5000/chat',
 }
 
 async function get_response(messages: ChatGPTMessage[], research: ResearchType): Promise<ChatGPTMessage[] | null> {
@@ -157,7 +130,6 @@ async function get_response(messages: ChatGPTMessage[], research: ResearchType):
     }
     
     const res = await fetch(search_functions[function_name], {
-    // const res = await fetch("http://127.0.0.1:5000/chat", {
       method: "POST",
       body: JSON.stringify({
         query: function_args.query,

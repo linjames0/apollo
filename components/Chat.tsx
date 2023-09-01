@@ -91,7 +91,7 @@ export function Chat({ researchType }: { researchType: ResearchType }) {
       body: JSON.stringify({
         messages: newMessages,
         user: cookie[COOKIE_NAME],
-        belief: researchType,
+        research: researchType,
       }),
     })
 
