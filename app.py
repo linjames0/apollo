@@ -2,11 +2,19 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
 import chromadb
-import openai
+from chromadb.config import Settings
 from tenacity import retry, stop_after_attempt, wait_random_exponential
 
-client = chromadb.PersistentClient(path="/Users/jameslin/Documents/Code/Alexandria/apollo/chroma-db")
-collection = client.get_collection(name="clinical_trials")
+# client = chromadb.PersistentClient(path="/Users/jameslin/Documents/Code/Alexandria/apollo/chroma-db")
+# collection = client.get_collection(name="clinical_trials")
+
+aws_client = chromadb.HttpClient(
+                    settings=Settings(chroma_client_auth_provider="chromadb.auth.token.TokenAuthClientProvider",
+                    chroma_client_auth_credentials="U3iw9F9lySTVXnlR4VUZewI0ok9kI3Ut"))
+
+aws_collection = aws_client.get_or_create_collection(name="clinical_trials")
+
+print(aws_collection.count())
 
 @retry(wait=wait_random_exponential(min=1, max=20), stop=stop_after_attempt(6))
 def get_embedding(text: str, id: str, model="text-embedding-ada-002") -> tuple[int, list[float]]:
@@ -46,7 +54,7 @@ def chat():
 
     system_results = []
     if n_results != "0":
-        results = collection.query(
+        results = aws_collection.query(
             query_embeddings=query_embedding,
             include=["documents"],
             n_results=int(n_results),
